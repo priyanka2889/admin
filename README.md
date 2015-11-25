@@ -1,2 +1,0 @@
-# admin
-recruitment admin
