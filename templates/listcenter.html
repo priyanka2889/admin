@@ -1,0 +1,13 @@
+<ion-view view-title="Masters -> Centers" name="listcenter-view">
+  <ion-nav-buttons side="right">
+        <button class="right button button-icon icon ion-plus" ng-click="insert()"></button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="item in items">
+                {{item.id}}
+            </ion-item>
+        </ion-list>
+{{name}}
+    </ion-content>
+</ion-view>

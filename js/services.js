@@ -62,6 +62,11 @@ angular.module('starter')
 	if(data.status=="1")
 	{
 		storeUserCredentials(name + '.yourServerToken');
+		localStorage.setItem('name', data.name);
+		localStorage.setItem('userId', data.userId);
+		localStorage.setItem('cntr_Id', data.cntr_Id);
+		localStorage.setItem('ref_Id', data.ref_Id);
+		localStorage.setItem('username', data.username);
         resolve('Login success.');
 	}
 	else {
@@ -115,3 +120,5 @@ angular.module('starter')
 .config(function ($httpProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
 });
+
+

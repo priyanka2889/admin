@@ -41,6 +41,30 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
         }
     }
   })
+  
+  .state('main.masters', {
+    url: 'main/masters',
+    views: {
+        'masters-tab': {
+          templateUrl: 'templates/masters.html',
+		  controller: 'MasterCtrl'
+          }
+    }
+  })
+  
+  .state('listcenter', {
+    url: 'masters/listcenter',
+	templateUrl: 'templates/masters/listcenter.html',
+	controller: 'CenterCtrl'
+	 })
+  
+  .state('addcenter', {
+    url: 'masters/addcenter',
+	templateUrl: 'templates/masters/addcenter.html',
+	controller: 'CenterCtrl'
+	 })
+  
+  
   .state('main.public', {
     url: 'main/public',
     views: {
@@ -49,6 +73,7 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
         }
     }
   })
+  
   .state('main.admin', {
     url: 'main/admin',
     views: {

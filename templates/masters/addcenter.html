@@ -1,0 +1,35 @@
+<ion-view view-title="Masters->Centers->Add" name="listcenter-view" ng-controller="CenterCtrl" >
+     <ion-content>
+         <div class="list list-inset">
+        <label class="item item-input">
+		  <span class="input-label">Name:</span>
+		  <input type="text" ng-model="data.name">
+		</label>
+		 <label class="item item-input">
+		  <span class="input-label">Address:</span>
+		  <input type="text" ng-model="data.address">
+		</label>
+		 <label class="item item-input">
+		  <span class="input-label">Mobile:</span>
+		  <input type="number" ng-model="data.mobile">
+		</label>
+		 <label class="item item-input">
+		  <span class="input-label">Phone:</span>
+		  <input type="number" ng-model="data.phone">
+		</label>
+		 <label class="item item-input">
+		  <span class="input-label">Contact Person:</span>
+		  <input type="text" ng-model="data.cperson">
+		</label>
+		<label class="item item-input">
+		  <span class="input-label">Contact Person Mobile:</span>
+		  <input type="number" ng-model="data.cpmobile">
+		</label>
+		<label class="item item-input">
+		  <span class="input-label">Email:</span>
+		  <input type="email" ng-model="data.email" >
+		</label>
+      </div>
+      <button class="button button-block button-positive" ng-click="addcenter(data)">Add</button>
+    </ion-content>
+</ion-view>

@@ -31,72 +31,22 @@ angular.module('starter')
 
 .controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
   $scope.data = {};
-    $scope.login = function(data) {
-    AuthService.login(data.username, data.password).then(function(authenticated) {
-      $state.go('main.dash', {}, {reload: true});
-      $scope.setCurrentUsername(data.username);
-    }, function(err) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Login failed!',
-        template: 'Please check your credentials!'
-      });
-    });
-  };
-  /*
-  $scope.login = function(data) {
-	  
-	var formData = "username="+data.username+"&password="+data.password;
-	
-	$.ajax({
-		type: "GET",
-		url:base_url+"checklogin",
-		async: 'true',
-		cache: false,
-		dataType: 'json',
-		data: formData,
-		success: onSuccess,
-		error:onError
-	});
-             
-	function onSuccess(data)
-	{
-	
-			if(data.status=="1"){
-				//localStorage.userId= data.userId;
-				//localStorage.username= data.username;
-				//localStorage.cntr_Id=data.cntr_Id;
-                $state.go('main.dash', {}, {//reload: true
-				});
-                $scope.setCurrentUsername(data.username);
-				}
-			else if(data.status== '0'){
-			var alertPopup = $ionicPopup.alert({
-				  title: 'Login failed!',
-				  template: 'Please check your credentials!'
-					 });
-			} 
-			else if(data.status== '2'){
-				var alertPopup = $ionicPopup.alert({
-				  title: 'Login failed!',
-				  template: 'You are not registered!'
-					 });
 
-			}
-			else if(data.status== '3'){
-				var alertPopup = $ionicPopup.alert({
-				  title: 'Login failed!',
-				  template: 'Please Check your UserType'
-					 });
-			}
-	}
-	function onError()
-	{
-		var alertPopup = $ionicPopup.alert({
-        title: 'Error',
-        template: 'Connection Error'
+  $scope.login = function(data) {
+	 AuthService.login(data.username, data.password).then(function(authenticated) 
+	  {
+	  $scope.setCurrentUsername(localStorage.getItem('name'));
+      $state.go('main.dash', {}, {reload: true});
+      
+	  }, function(err) 
+	  {
+		   var alertPopup = $ionicPopup.alert({
+			title: 'Login failed!',
+			template: 'Please check your credentials!'
+		   });
       });
-	} 
- };*/
+  };
+
 })
 
 .controller('DashCtrl', function($scope, $state, $http, $ionicPopup, AuthService) {
@@ -106,7 +56,7 @@ angular.module('starter')
   };
 
   $scope.performValidRequest = function() {
-    $http.get('http://localhost:8100/valid').then(
+    $http.get('http://localhost/schoolapp/public/listcenter?_=1448856387546').then(
       function(result) {
         $scope.response = result;
       });
@@ -129,4 +79,75 @@ angular.module('starter')
         $scope.response = err;
       });
   };
-});
+})
+
+.controller('MasterCtrl', function($scope, $state, $http, $ionicPopup, AuthService) {
+	$scope.listcenter = function() {
+	$state.go('listcenter');
+   
+	
+  };
+})
+
+.controller('CenterCtrl', function($scope,$state,$ionicPopup, $http) {
+	$scope.data = {};
+	
+	$scope.init=function() {
+		getCenterList();
+	};
+   getCenterList = function() {
+	$.ajax({
+		type: "GET",
+		url:base_url+"listcenter",
+		async: 'true',
+		cache: false,
+		dataType: 'json',
+		success: function(data) {
+			$scope.items=data;},
+		error:onError
+	});
+	  getCenterList();
+	function onError()
+	{
+	var alertPopup = $ionicPopup.alert({
+			title: 'No Data',
+			template: 'No Centers Found'
+		   });
+	}
+	};
+	
+    $scope.insert = function() {
+	$state.go('addcenter');
+    };
+
+	$scope.addcenter = function(data) 
+	{
+		$.ajax({
+				type: "GET",
+				url: base_url+"center/create",
+				cache: false,
+				dataType:"json",
+				data: data,
+				success: function(data){
+					if(data.status=="1")
+					{
+						$state.go('listcenter');
+					    var alertPopup = $ionicPopup.alert({
+						title: 'Success',
+						template: 'Added Successfully'});
+					}
+					else
+					{
+						var alertPopup = $ionicPopup.alert({
+						title: 'Fail',
+						template: 'Error'});
+					}
+					
+				},
+				error: function(){var alertPopup = $ionicPopup.alert({
+						title: 'Error',
+						template: 'Connection Error'});}
+			});
+    };
+	
+})

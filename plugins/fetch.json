@@ -1,0 +1,10 @@
+{
+    "cordova-plugin-battery-status": {
+        "source": {
+            "type": "local",
+            "path": "C:\\Users\\dell\\AppData\\Local\\Intel\\XDK\\xdk\\components\\server\\cordova-plugins\\cordova-plugin-battery-status"
+        },
+        "is_top_level": true,
+        "variables": {}
+    }
+}
